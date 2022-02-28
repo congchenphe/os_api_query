@@ -19,4 +19,17 @@ result <- c(get_address("133","SE1 8UG", KEY,"",FALSE),
             get_address('999', 'AA1 9ZZ', KEY, "Zero Results")
             )
 
+
 paste(result)
+
+get_address_vectorized = Vectorize(get_address, vectorize.args = c('building', 'postcode'))
+
+result1 = get_address_vectorized(building = c('133', '133', 'Wellington House', 'Wellington House', '10', '61', '99', '99', 'the meadows', '999'),
+                                 postcode = c('SE1 8UG', 'SE18UG', 'SE1 8UG', 'SE18UG', 'SW1A2AA', 'NW9 5DF', 'SO01 0ZZ', 'SO01 0ZZ', 'SP5 1EZ', 'AA1 9ZZ'),
+                                 api_key = KEY)
+
+
+get_address_from_uprn_vectorized = Vectorize(get_address_from_uprn, vectorize.args = 'uprn_string')
+
+get_address_from_uprn_vectorized(uprn_string = c('10033625525', '200010019924', 'fail_this'),
+                                 api_key = KEY)
